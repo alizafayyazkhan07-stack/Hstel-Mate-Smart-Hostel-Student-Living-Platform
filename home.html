@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HostelMate – Smart Hostel & Student Living Platform</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Ambient Light Geometric Curve -->
+  <div class="bg-shape-circle"></div>
+
+  <!-- Header Navigation -->
+  <header class="custom-navbar">
+    <div class="d-flex justify-content-between align-items-center">
+      
+      <!-- Brand Logo -->
+      <a href="home.html" class="brand-wrap">
+        <div class="brand-badge"><i class="bi bi-buildings-fill"></i></div>
+        <span>HostelMate</span>
+      </a>
+
+      <!-- Center Links (Direct Smooth Scrolling) -->
+      <ul class="nav-menu-custom d-none d-lg-flex">
+        <li><a href="home.html">Home</a></li>
+        <li><a href="#features">Features</a></li>
+        <li><a href="#dashboards">Dashboard</a></li>
+        <li><a href="#how-it-works">How It Works</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <!-- Right Action Login Button (Direct link to login.html) -->
+      <div>
+        <a href="login.html" class="btn-blue-primary">
+          <i class="bi bi-box-arrow-in-right"></i> Login
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main class="hero-wrapper">
+    <div class="container-fluid max-w-1300 p-0">
+      <div class="row align-items-center g-5">
+        
+        <!-- Left Hero Content -->
+        <div class="col-lg-6">
+          <div class="pill-badge">
+          </div>
+
+          <h1 class="hero-main-title">
+          HostelMate <br>
+            <span class="blue-gradient-text">Smart Hostel & Student Living Platform</span>
+          </h1>
+
+          <p class="hero-description">
+            A unified campus residential system designed to automate student admissions, smart bed allocation, dining attendance, digital gate passes, and maintenance workflows across all hostel blocks.
+          </p>
+
+          <div class="d-flex align-items-center gap-3">
+            <!-- Get Started scrolls directly to Features -->
+            <a href="#features" class="btn-hero-cta">
+              Get Started <i class="bi bi-arrow-down-circle"></i>
+            </a>
+            <!-- Direct link to login.html -->
+            <a href="login.html" class="btn-hero-demo">
+              <i class="bi bi-box-arrow-in-right"></i> Login Portal
+            </a>
+          </div>
+        </div>
+
+        <!-- Right 2x2 Metric App Mockup (Blue Palette) -->
+        <div class="col-lg-6">
+          <div class="mockup-frame p-4">
+            
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div class="d-flex gap-2">
+                <div class="circle-dot dot-red"></div>
+                <div class="circle-dot dot-yellow"></div>
+                <div class="circle-dot dot-green"></div>
+              </div>
+            </div>
+
+            <!-- 2x2 Metric Tiles -->
+            <div class="row g-3 mb-3">
+              <div class="col-6">
+                <div class="p-3 rounded-4" style="background: #eff6ff; color: #2563eb;">
+                  <small class="text-muted d-block">Enrolled Residents</small>
+                  <h3 class="fw-bold mb-0">420</h3>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="p-3 rounded-4" style="background: #f0fdf4; color: #059669;">
+                  <small class="text-muted d-block">Dues Settlement</small>
+                  <h3 class="fw-bold mb-0">94.8%</h3>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="p-3 rounded-4" style="background: #fefce8; color: #d97706;">
+                  <small class="text-muted d-block">Open Tickets</small>
+                  <h3 class="fw-bold mb-0">02</h3>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="p-3 rounded-4" style="background: #eff6ff; color: #1d4ed8;">
+                  <small class="text-muted d-block">Bed Capacity</small>
+                  <h3 class="fw-bold mb-0">375/420</h3>
+                </div>
+              </div>
+            </div>
+
+            <!-- Blue Rounded Bar Graph -->
+            <div class="p-3 bg-light rounded-4 d-flex align-items-end justify-content-between" style="height: 110px; gap: 8px;">
+              <div style="flex:1; background:#bfdbfe; border-radius:20px; height:45%;"></div>
+              <div style="flex:1; background:#93c5fd; border-radius:20px; height:75%;"></div>
+              <div style="flex:1; background:#60a5fa; border-radius:20px; height:55%;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:20px; height:90%;"></div>
+              <div style="flex:1; background:#93c5fd; border-radius:20px; height:70%;"></div>
+              <div style="flex:1; background:#60a5fa; border-radius:20px; height:85%;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:20px; height:100%;"></div>
+              <div style="flex:1; background:#bfdbfe; border-radius:20px; height:60%;"></div>
+              <div style="flex:1; background:#93c5fd; border-radius:20px; height:80%;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:20px; height:95%;"></div>
+              <div style="flex:1; background:#60a5fa; border-radius:20px; height:70%;"></div>
+              <div style="flex:1; background:#2563eb; border-radius:20px; height:88%;"></div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FEATURES SECTION (Target of Get Started button) -->
+  <section class="container py-5" id="features">
+    <div class="text-center mb-5">
+      <div class="section-pill-badge">System Capabilities</div>
+      <h2 class="display-6 fw-bold mb-3">Comprehensive Hostel Features</h2>
+      <p class="text-muted mx-auto" style="max-width: 650px;">
+        Designed to digitize every administrative task and daily resident interaction seamlessly.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="feature-box">
+          <div class="feature-icon-circle"><i class="bi bi-door-closed"></i></div>
+          <h5 class="fw-bold">Smart Room Allocation</h5>
+          <p class="text-muted small mb-0">Automated block distribution across Boys & Girls hostels with roommate compatibility matching based on lifestyle and study habits.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <div class="feature-icon-circle"><i class="bi bi-tools"></i></div>
+          <h5 class="fw-bold">Maintenance Desk</h5>
+          <p class="text-muted small mb-0">Lodge plumbing, electrical, and carpentry complaints instantly. Real-time priority tracking and warden resolution verification.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <div class="feature-icon-circle"><i class="bi bi-egg-fried"></i></div>
+          <h5 class="fw-bold">Mess Opt-In & Meal Menu</h5>
+          <p class="text-muted small mb-0">Daily breakfast, lunch, and dinner participation switchers to reduce kitchen food wastage, paired with transparent quality ratings.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <div class="feature-icon-circle"><i class="bi bi-credit-card"></i></div>
+          <h5 class="fw-bold">Smart Fee Ledger</h5>
+          <p class="text-muted small mb-0">Centralized tracking of hostel dues and semester mess payments with electronic clearance records and automated payment receipts.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <div class="feature-icon-circle"><i class="bi bi-calendar-check"></i></div>
+          <h5 class="fw-bold">Gate Pass & Leave Approvals</h5>
+          <p class="text-muted small mb-0">Digital outpass workflow featuring emergency parental contact logging, security checkpoints, and instant warden approvals.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="feature-box">
+          <div class="feature-icon-circle"><i class="bi bi-megaphone"></i></div>
+          <h5 class="fw-bold">Digital Campus Circulars</h5>
+          <p class="text-muted small mb-0">Instant administrative announcements regarding campus inspections, Wi-Fi maintenance, and emergency circular broadcasts.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROLE-BASED DASHBOARDS SECTION -->
+  <section class="container py-5" id="dashboards">
+    <div class="text-center mb-5">
+      <div class="section-pill-badge">Portals</div>
+      <h2 class="display-6 fw-bold mb-3">Role-Based Dashboards</h2>
+      <p class="text-muted mx-auto" style="max-width: 650px;">
+        Tailored experiences for every stakeholder — administrators, rectors, and students get direct access to their workspaces.
+      </p>
+    </div>
+
+    <div class="row g-4">
+      <!-- 1. Owner / Admin Dashboard Card -->
+      <div class="col-lg-4 col-md-6">
+        <div class="role-card">
+          <div class="role-icon-box icon-box-primary-blue">
+            <i class="bi bi-buildings"></i>
+          </div>
+          <h4 class="role-title">Admin Dashboard</h4>
+          <p class="role-desc">
+            Complete hostel block infrastructure overview, capacity analytics, and resident directory management.
+          </p>
+          <a href="login.html" class="role-link-btn">
+            View Dashboard <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- 2. Rector Dashboard Card -->
+      <div class="col-lg-4 col-md-6">
+        <div class="role-card">
+          <div class="role-icon-box icon-box-cyan">
+            <i class="bi bi-shield-check"></i>
+          </div>
+          <h4 class="role-title">Rector Dashboard</h4>
+          <p class="role-desc">
+            Manage operational workflows, admission verifications, gate pass authorizations, and maintenance dispatches.
+          </p>
+          <a href="login.html" class="role-link-btn">
+            View Dashboard <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- 3. Student Dashboard Card -->
+      <div class="col-lg-4 col-md-6">
+        <div class="role-card">
+          <div class="role-icon-box icon-box-amber-blue">
+            <i class="bi bi-mortarboard"></i>
+          </div>
+          <h4 class="role-title">Student Dashboard</h4>
+          <p class="role-desc">
+            Access your room details, pay semester dues, opt-in for dining meals, lodge tickets, and submit gate passes.
+          </p>
+          <a href="login.html" class="role-link-btn">
+            View Dashboard <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="container py-5" id="how-it-works">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">How It Works</h2>
+      <p class="text-muted">Three straightforward steps to run your campus living digitally.</p>
+    </div>
+
+    <div class="row g-4 text-center">
+      <div class="col-md-4">
+        <div class="dashboard-card">
+          <div class="user-avatar mx-auto mb-3" style="background:#2563eb; color:#fff; font-weight:bold;">1</div>
+          <h5 class="fw-bold">Register & Allot</h5>
+          <p class="text-muted small mb-0">Students submit applications online and get allocated rooms in their respective hostel wings.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="dashboard-card">
+          <div class="user-avatar mx-auto mb-3" style="background:#2563eb; color:#fff; font-weight:bold;">2</div>
+          <h5 class="fw-bold">Daily Self-Service</h5>
+          <p class="text-muted small mb-0">Residents easily manage meals, report repairs, and request gate passes directly from their phones.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="dashboard-card">
+          <div class="user-avatar mx-auto mb-3" style="background:#2563eb; color:#fff; font-weight:bold;">3</div>
+          <h5 class="fw-bold">Central Monitoring</h5>
+          <p class="text-muted small mb-0">Wardens and administration review live occupancy, fee collections, and resolve tickets instantly.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enhanced Contact Section -->
+  <section class="container py-5" id="contact">
+    <div class="text-center mb-5">
+      <h2 class="fw-bold">Get in Touch</h2>
+      <p class="text-muted">Have questions regarding hostel admission or estate operations? Our helpdesk is available 24/7.</p>
+    </div>
+
+    <div class="row g-4 align-items-stretch">
+      <div class="col-lg-5">
+        <div class="dashboard-card h-100 p-4">
+          <h5 class="fw-bold mb-3 text-primary"><i class="bi bi-geo-alt-fill me-2"></i>Campus Estate & Hostel Desk</h5>
+          <p class="text-muted small mb-4">Contact our administrative office for urgent hostel allocations, parent queries, or warden assistance.</p>
+          
+          <div class="contact-info-pill">
+            <div class="contact-info-icon"><i class="bi bi-telephone-fill"></i></div>
+            <div>
+              <small class="text-muted d-block">Helpline & Security Desk</small>
+              <strong>+91 98220 11223</strong>
+            </div>
+          </div>
+
+          <div class="contact-info-pill">
+            <div class="contact-info-icon"><i class="bi bi-envelope-fill"></i></div>
+            <div>
+              <small class="text-muted d-block">Official Inquiries</small>
+              <strong>support@smarthostel.edu</strong>
+            </div>
+          </div>
+
+          <div class="contact-info-pill mb-0">
+            <div class="contact-info-icon"><i class="bi bi-clock-fill"></i></div>
+            <div>
+              <small class="text-muted d-block">Office Hours</small>
+              <strong>Mon - Sat: 08:30 AM - 06:30 PM</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-7">
+        <div class="dashboard-card h-100 p-4">
+          <h5 class="fw-bold mb-3">Send a Message to Administration</h5>
+          <form onsubmit="event.preventDefault(); alert('Your message has been dispatched to the Estate Office.'); this.reset();">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Full Name</label>
+                <input type="text" class="form-control" placeholder="e.g. Aliza Fayyaz Khan" required>
+              </div>
+              <div class="col-md-6">
+                <label class="form-label small fw-bold">Email Address</label>
+                <input type="email" class="form-control" placeholder="name@hostel.edu" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-bold">Subject</label>
+                <input type="text" class="form-control" placeholder="Hostel Admission / Mess Query" required>
+              </div>
+              <div class="col-12">
+                <label class="form-label small fw-bold">Message</label>
+                <textarea class="form-control" rows="3" placeholder="State your query in detail..." required></textarea>
+              </div>
+              <div class="col-12 text-end">
+                <button type="submit" class="btn btn-primary px-4 py-2">Send Message</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-4 text-center text-muted small border-top bg-white">
+    Smart Hostel Management System &copy; 2026. All rights reserved.
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>hec

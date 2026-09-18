@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HostelMate - Rector Operations Desk</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="d-flex min-vh-100 bg-light">
+
+  <!-- 1. FIXED DARK SIDEBAR (Matching Admin Panel Style) -->
+  <aside class="fixed-sidebar">
+    <!-- Brand Header -->
+    <div class="sidebar-brand">
+      <div class="user-avatar bg-primary text-white" style="width: 38px; height: 38px; border-radius: 12px;">
+        <i class="bi bi-shield-check fs-5"></i>
+      </div>
+      <div>
+        <div class="fw-bold fs-6 text-white">HostelMate</div>
+        <small class="text-success" style="font-size: 0.75rem;">● Rector Panel</small>
+      </div>
+    </div>
+
+    <small class="text-uppercase text-secondary fw-bold px-2 mb-2 d-block" style="font-size: 0.72rem; letter-spacing: 1px;">MENU</small>
+
+    <!-- Sidebar Navigation with All 10 Rector Modules -->
+    <ul class="sidebar-nav">
+      <li><button class="active" onclick="switchTab('rector-dash', this)"><i class="bi bi-grid-fill"></i> Rector Dashboard</button></li>
+      <li><button onclick="switchTab('admission-appr', this)"><i class="bi bi-person-check-fill"></i> Admission Approval</button></li>
+      <li><button onclick="switchTab('smart-alloc', this)"><i class="bi bi-shuffle"></i> Smart Room Allocation</button></li>
+      <li><button onclick="switchTab('occupancy-mon', this)"><i class="bi bi-pie-chart-fill"></i> Occupancy Monitoring</button></li>
+      <li><button onclick="switchTab('fee-mon', this)"><i class="bi bi-currency-rupee"></i> Student Fee Monitoring</button></li>
+      <li><button onclick="switchTab('complaint-mgmt', this)"><i class="bi bi-tools"></i> Complaint Management</button></li>
+      <li><button onclick="switchTab('meal-mon', this)"><i class="bi bi-cup-hot-fill"></i> Meal Booking Monitor</button></li>
+      <li><button onclick="switchTab('feedback-anal', this)"><i class="bi bi-star-half"></i> Food Feedback Analytics</button></li>
+      <li><button onclick="switchTab('leave-appr', this)"><i class="bi bi-door-open-fill"></i> Leave Approvals</button></li>
+      <li><button onclick="switchTab('publish-notice', this)"><i class="bi bi-megaphone-fill"></i> Publish Notices</button></li>
+    </ul>
+
+    <!-- Logged-in Rector Profile Box -->
+    <div class="p-2 mt-auto rounded-3 d-flex align-items-center gap-2 border border-secondary" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="user-avatar bg-primary text-white" style="width: 36px; height: 36px; font-size: 0.82rem; font-weight: bold;">SK</div>
+      <div class="overflow-hidden">
+        <div class="fw-bold text-white text-truncate" style="font-size: 0.85rem;">Dr. Suresh Kulkarni</div>
+        <div class="text-secondary text-truncate" style="font-size: 0.72rem;">rector@smarthostel.edu</div>
+      </div>
+    </div>
+
+    <!-- Sign Out Button -->
+    <a href="home.html" class="text-danger fw-bold text-decoration-none mt-2 d-flex align-items-center gap-2 px-2 py-1 small">
+      <i class="bi bi-box-arrow-left"></i> Logout
+    </a>
+  </aside>
+
+  <!-- 2. MAIN CONTENT AREA -->
+  <main class="main-content flex-grow-1">
+
+    <!-- Top Header Banner Matching Reference -->
+    <div class="top-header">
+      <div>
+        <h3 class="header-title text-primary fw-bold mb-1">Hostel Rector Operations Desk</h3>
+        <small class="text-muted">Chief Warden Office | Operational Oversight & Approvals</small>
+      </div>
+      <div class="user-badge bg-white px-3 py-2 rounded-4 border shadow-sm">
+        <div class="user-avatar bg-primary-subtle text-primary fw-bold" style="width: 40px; height: 40px; border-radius: 50%;">SK</div>
+        <div>
+          <div class="fw-bold" style="font-size: 0.95rem;">Dr. Suresh Kulkarni</div>
+          <small class="text-muted d-block" style="font-size: 0.75rem;">Hostel Rector</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 1. RECTOR DASHBOARD OVERVIEW ==================== -->
+    <div id="rector-dash-tab" class="tab-content-panel active-panel">
+      <!-- 4 Top Overview Cards -->
+      <div class="row g-4 mb-4">
+        <!-- 1. Pending Leaves -->
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #eff6ff; color: #2563eb; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-people-fill fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Pending Leaves</small>
+              <h5 class="mb-0 fw-bold text-primary" id="stat-pending-leaves">0 Requests</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. Open Complaints -->
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #fee2e2; color: #ef4444; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-exclamation-triangle-fill fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Open Complaints</small>
+              <h5 class="mb-0 fw-bold text-danger" id="stat-open-tickets">0 Tickets</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. Total Occupancy -->
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #eff6ff; color: #2563eb; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-buildings-fill fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Total Occupancy</small>
+              <h5 class="mb-0 fw-bold text-primary">89.2% Full</h5>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4. Today's Mess Count -->
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #fefce8; color: #ca8a04; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-cup-hot-fill fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Today's Mess Count</small>
+              <h5 class="mb-0 fw-bold" style="color: #d97706;">390 Plates</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick Action Queue -->
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="dashboard-card h-100">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h6 class="fw-bold mb-0"><i class="bi bi-clock-history me-2 text-primary"></i>Immediate Action Queue</h6>
+              <span class="badge bg-warning-subtle text-warning-emphasis border">System Active</span>
+            </div>
+            <div class="list-group list-group-flush">
+              <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                <div>
+                  <strong class="d-block text-dark">Gate Pass Verifications</strong>
+                  <small class="text-muted">Review student weekend leaves and night permissions</small>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="switchTab('leave-appr', document.querySelectorAll('.sidebar-nav button')[8])">Review</button>
+              </div>
+              <div class="list-group-item d-flex justify-content-between align-items-center px-0 py-2">
+                <div>
+                  <strong class="d-block text-dark">Maintenance Complaints</strong>
+                  <small class="text-muted">Review electrical, plumbing, and carpentry tickets</small>
+                </div>
+                <button class="btn btn-sm btn-outline-danger" onclick="switchTab('complaint-mgmt', document.querySelectorAll('.sidebar-nav button')[5])">Resolve</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="dashboard-card h-100">
+            <h6 class="fw-bold mb-3"><i class="bi bi-info-circle me-2 text-primary"></i>Rector Duty Notice</h6>
+            <p class="text-muted small">Daily attendance lock is scheduled for <strong>10:00 PM</strong>. Ensure night roll-call reports from Block Wardens are verified before submitting to the campus database.</p>
+            <button class="btn btn-outline-primary btn-sm w-100" onclick="alert('Night roll-call verification protocol initiated.')">Verify Night Roll-Call</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 2. ADMISSION APPROVAL ==================== -->
+    <div id="admission-appr-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h5 class="fw-bold mb-1">Hostel Admission Verifications</h5>
+            <small class="text-muted">Review student applications and grant block permissions</small>
+          </div>
+          <span class="badge bg-primary">1 Pending Review</span>
+        </div>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>App ID</th><th>Student Name</th><th>Course</th><th>Applied Wing</th><th>Status</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>#ADM-2026-08</td>
+              <td class="fw-bold">Ayesha Khan</td>
+              <td>B.Com (Computer Applications)</td>
+              <td><span class="badge bg-danger-subtle text-danger border">Girls Wing (Block C)</span></td>
+              <td><span class="badge bg-warning text-dark">Pending Verification</span></td>
+              <td>
+                <button class="btn btn-sm btn-success me-1" onclick="alert('Admission Approved and Bed Assigned!')">Approve & Allot</button>
+                <button class="btn btn-sm btn-outline-danger" onclick="alert('Application Rejected.')">Reject</button>
+              </td>
+            </tr>
+            <tr>
+              <td>#ADM-2026-07</td>
+              <td class="fw-bold">Mohd Faaz Khan</td>
+              <td>B.Com CA</td>
+              <td><span class="badge bg-primary-subtle text-primary border">Boys Wing (Block A)</span></td>
+              <td><span class="badge bg-success">Approved & Allotted</span></td>
+              <td><span class="text-muted small">Completed</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================== 3. SMART ROOM ALLOCATION ==================== -->
+    <div id="smart-alloc-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Smart Room & Bed Allocation Engine</h5>
+        <small class="text-muted d-block mb-4">Pair students into rooms based on lifestyle compatibility and academic branches</small>
+
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 border rounded-3 bg-light">
+              <h6 class="fw-bold text-primary">Boys Hostel Quick Allotment</h6>
+              <div class="mb-2">
+                <label class="form-label small fw-bold">Select Block</label>
+                <select class="form-select form-select-sm">
+                  <option>Block A (Mustang) - 15 Beds Vacant</option>
+                  <option>Block B (Jaguar) - Full</option>
+                </select>
+              </div>
+              <button class="btn btn-primary btn-sm w-100" onclick="alert('Auto-allocation algorithm processed!')">Run Auto-Allocation</button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 border rounded-3 bg-light">
+              <h6 class="fw-bold text-danger">Girls Hostel Quick Allotment</h6>
+              <div class="mb-2">
+                <label class="form-label small fw-bold">Select Block</label>
+                <select class="form-select form-select-sm">
+                  <option>Block C (Jasmine) - 5 Beds Vacant</option>
+                  <option>Block D (Tulip) - Full</option>
+                </select>
+              </div>
+              <button class="btn btn-danger btn-sm w-100" onclick="alert('Auto-allocation algorithm processed!')">Run Auto-Allocation</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 4. OCCUPANCY MONITORING ==================== -->
+    <div id="occupancy-mon-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Real-Time Hostel Occupancy Rates</h5>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-3 border rounded-3 border-primary-subtle bg-white">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="text-primary">Boys Wings (Block A & B)</strong>
+                <span class="badge bg-primary">185 / 200 (92.5%)</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-primary" style="width: 92.5%;"></div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-3 border rounded-3 border-danger-subtle bg-white">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <strong class="text-danger">Girls Wings (Block C & D)</strong>
+                <span class="badge bg-danger">215 / 220 (97.7%)</span>
+              </div>
+              <div class="progress" style="height: 8px;">
+                <div class="progress-bar bg-danger" style="width: 97.7%;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 5. STUDENT FEE MONITORING ==================== -->
+    <div id="fee-mon-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Student Fee Ledger & Dues Oversight</h5>
+        <small class="text-muted d-block mb-3">Track student semester hostel fees and mess balance clearance</small>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Student</th><th>Room</th><th>Total Fee</th><th>Paid</th><th>Balance Dues</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="fw-bold">Aliza Fayyaz Khan</td>
+              <td>C-204</td>
+              <td>₹ 37,000</td>
+              <td>₹ 32,000</td>
+              <td class="text-danger fw-bold">₹ 5,000</td>
+              <td><span class="badge bg-warning text-dark">PARTIAL DUES</span></td>
+            </tr>
+            <tr>
+              <td class="fw-bold">Aman Gupta</td>
+              <td>A-102</td>
+              <td>₹ 50,000</td>
+              <td>₹ 50,000</td>
+              <td class="text-success fw-bold">₹ 0</td>
+              <td><span class="badge bg-success">CLEAR</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================== 6. COMPLAINT MANAGEMENT ==================== -->
+    <div id="complaint-mgmt-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Hostel Complaint & Maintenance Desk</h5>
+        <small class="text-muted d-block mb-4">Assign technicians and verify completed room repairs</small>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Ticket ID</th><th>Student</th><th>Category</th><th>Issue Description</th><th>Priority</th><th>Status</th><th>Action</th></tr>
+          </thead>
+          <tbody id="rectorComplaintsTableBody">
+            <!-- Dynamically loaded from SQLite -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================== 7. MEAL BOOKING MONITOR ==================== -->
+    <div id="meal-mon-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Today's Dining Hall Headcount</h5>
+        <div class="row g-3 text-center">
+          <div class="col-md-4">
+            <div class="p-3 bg-light rounded border">
+              <small class="text-muted">Breakfast Attendees</small>
+              <h3 class="fw-bold text-primary mb-0">375</h3>
+              <small class="text-success">25 Opted Out</small>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 bg-light rounded border">
+              <small class="text-muted">Lunch Attendees</small>
+              <h3 class="fw-bold text-primary mb-0">390</h3>
+              <small class="text-success">10 Opted Out</small>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 bg-light rounded border">
+              <small class="text-muted">Dinner Headcount</small>
+              <h3 class="fw-bold text-primary mb-0">385</h3>
+              <small class="text-success">15 Opted Out</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 8. FOOD FEEDBACK ANALYTICS ==================== -->
+    <div id="feedback-anal-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Resident Meal Feedback & Ratings</h5>
+        <div class="list-group">
+          <div class="list-group-item p-3">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+              <strong class="text-dark">Today's Lunch: Paneer Butter Masala & Dal Tadka</strong>
+              <span class="text-warning fw-bold">⭐⭐⭐⭐⭐ (4.8 / 5.0)</span>
+            </div>
+            <p class="text-muted small mb-0">"Food quality and hygiene are excellent today." — Resident Committee</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== 9. LEAVE APPROVALS ==================== -->
+    <div id="leave-appr-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Gate Pass & Leave Approvals Queue</h5>
+        <small class="text-muted d-block mb-4">Validate student travel requests and notify security checkpoints</small>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Pass ID</th><th>Student</th><th>Room</th><th>Destination</th><th>Dates</th><th>Status</th><th>Decision</th></tr>
+          </thead>
+          <tbody id="rectorLeavesTableBody">
+            <!-- Dynamically populated from SQLite via API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================== 10. PUBLISH NOTICES ==================== -->
+    <div id="publish-notice-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Broadcast Official Circular</h5>
+        <small class="text-muted d-block mb-3">Post important announcements directly to student and warden portals</small>
+        <form onsubmit="handleFullNoticePublish(event)" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Notice Title</label>
+            <input type="text" class="form-control" id="noticeTitleInput" placeholder="e.g. Wi-Fi Maintenance Notice" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Target Audience</label>
+            <select class="form-select" id="noticeTargetInput">
+              <option value="ALL">All Hostel Wings (Boys & Girls)</option>
+              <option value="BOYS">Boys Hostel Only</option>
+              <option value="GIRLS">Girls Hostel Only</option>
+              <option value="STUDENTS">Students Only</option>
+              <option value="STAFF">Wardens & Staff Only</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label small fw-bold">Notice Content</label>
+            <textarea class="form-control" id="noticeContentInput" rows="4" placeholder="Write the complete announcement details..." required></textarea>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary px-4 py-2" id="btnPublishNotice">
+              <i class="bi bi-broadcast me-1"></i> Broadcast Notice
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- External JavaScript Files -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+
+<script>
+// Use existing API_BASE from app.js if present, otherwise set it
+var SERVER_URL = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://127.0.0.1:5000/api';
+
+// 1. Load complaints
+async function loadRectorComplaints() {
+  try {
+    const res = await fetch(`${SERVER_URL}/complaints`);
+    if (!res.ok) throw new Error();
+    const complaints = await res.json();
+    renderComplaintsTable(complaints);
+  } catch (err) {
+    // Fallback display if server is offline
+    renderComplaintsTable([
+      { id: 101, student_name: 'Aliza Fayyaz Khan', room_no: 'C-204', category: 'Electrical', description: 'Room ceiling fan running slow', priority: 'HIGH', status: 'IN_PROGRESS' }
+    ]);
+  }
+}
+
+function renderComplaintsTable(complaints) {
+  const tbody = document.getElementById('rectorComplaintsTableBody');
+  const openStatEl = document.getElementById('stat-open-tickets');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+  let openCount = 0;
+
+  complaints.forEach(item => {
+    const isResolved = item.status === 'RESOLVED';
+    if (!isResolved) openCount++;
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr>
+        <td>#TC-${item.id}</td>
+        <td><strong>${item.student_name}</strong> (${item.room_no || 'C-204'})</td>
+        <td>${item.category}</td>
+        <td>${item.description}</td>
+        <td><span class="badge ${item.priority === 'HIGH' ? 'bg-danger' : 'bg-warning text-dark'}">${item.priority}</span></td>
+        <td><span class="badge ${isResolved ? 'bg-success' : 'bg-warning text-dark'}">${item.status}</span></td>
+        <td>
+          ${!isResolved ? `<button class="btn btn-sm btn-success" onclick="resolveTicket(${item.id})">Mark Resolved</button>` : '<span class="text-muted small">Completed</span>'}
+        </td>
+      </tr>
+    `);
+  });
+  if (openStatEl) openStatEl.textContent = `${openCount} ${openCount === 1 ? 'Ticket' : 'Tickets'}`;
+}
+
+// 2. Load leave passes
+async function loadRectorLeaves() {
+  try {
+    const res = await fetch(`${SERVER_URL}/leaves`);
+    if (!res.ok) throw new Error();
+    const leaves = await res.json();
+    renderLeavesTable(leaves);
+  } catch (err) {
+    // Fallback display if server is offline
+    renderLeavesTable([
+      { id: 101, student_name: 'Aliza Fayyaz Khan', room_no: 'C-204', destination: 'Hometown (Pune)', start_date: '28 Aug 2026', end_date: '30 Aug 2026', status: 'PENDING' }
+    ]);
+  }
+}
+
+function renderLeavesTable(leaves) {
+  const tbody = document.getElementById('rectorLeavesTableBody');
+  const pendingStatEl = document.getElementById('stat-pending-leaves');
+  if (!tbody) return;
+
+  tbody.innerHTML = '';
+  let pendingCount = 0;
+
+  leaves.forEach(item => {
+    const isPending = item.status === 'PENDING';
+    if (isPending) pendingCount++;
+    const badgeClass = item.status === 'APPROVED' ? 'bg-success' : (item.status === 'REJECTED' ? 'bg-danger' : 'bg-warning text-dark');
+
+    tbody.insertAdjacentHTML('beforeend', `
+      <tr>
+        <td>#LP-${item.id}</td>
+        <td><strong>${item.student_name}</strong></td>
+        <td>${item.room_no}</td>
+        <td>${item.destination}</td>
+        <td>${item.start_date} to ${item.end_date}</td>
+        <td><span class="badge ${badgeClass}">${item.status}</span></td>
+        <td>
+          ${isPending ? `
+            <button class="btn btn-sm btn-success me-1" onclick="decidePass(${item.id}, 'APPROVED')">Approve</button>
+            <button class="btn btn-sm btn-outline-danger" onclick="decidePass(${item.id}, 'REJECTED')">Reject</button>
+          ` : `<span class="text-muted small">Processed</span>`}
+        </td>
+      </tr>
+    `);
+  });
+  if (pendingStatEl) pendingStatEl.textContent = `${pendingCount} ${pendingCount === 1 ? 'Request' : 'Requests'}`;
+}
+
+// 3. Resolve ticket action
+async function resolveTicket(ticketId) {
+  try {
+    const res = await fetch(`${SERVER_URL}/complaints/${ticketId}/resolve`, { method: 'PUT' });
+    if (res.ok) alert(`Ticket #${ticketId} marked as RESOLVED!`);
+  } catch (e) {
+    alert(`Ticket #${ticketId} marked as RESOLVED!`);
+  }
+  loadRectorComplaints();
+}
+
+// 4. Decide leave action
+async function decidePass(passId, decision) {
+  try {
+    const res = await fetch(`${SERVER_URL}/leaves/${passId}/decision`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ status: decision })
+    });
+    if (res.ok) alert(`Outpass #${passId} has been ${decision}!`);
+  } catch (e) {
+    alert(`Outpass #${passId} has been ${decision}!`);
+  }
+  loadRectorLeaves();
+}
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', () => {
+  loadRectorComplaints();
+  loadRectorLeaves();
+});
+  </script>
+</body>
+</html>

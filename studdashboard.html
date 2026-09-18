@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Hostel - Student Self-Service Portal</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="d-flex min-vh-100 bg-light">
+
+  <aside class="fixed-sidebar">
+    <div class="sidebar-brand">
+      <div class="user-avatar bg-primary text-white" style="width: 38px; height: 38px; border-radius: 12px;">
+        <i class="bi bi-mortarboard-fill fs-5"></i>
+      </div>
+      <div>
+        <div class="fw-bold fs-6 text-white">Smart Hostel</div>
+        <small class="text-success" style="font-size: 0.75rem;">● Student Panel</small>
+      </div>
+    </div>
+
+    <small class="text-uppercase text-secondary fw-bold px-2 mb-2 d-block" style="font-size: 0.72rem; letter-spacing: 1px;">MENU</small>
+
+    <ul class="sidebar-nav">
+      <li><button class="active" onclick="switchTab('student-dash', this)"><i class="bi bi-grid-fill"></i> Dashboard Overview</button></li>
+      <li><button onclick="switchTab('profile-mgmt', this)"><i class="bi bi-person-lines-fill"></i> Profile Management</button></li>
+      <li><button onclick="switchTab('admission-app', this)"><i class="bi bi-file-earmark-plus-fill"></i> Admission Application</button></li>
+      <li><button onclick="switchTab('roommate-match', this)"><i class="bi bi-people-fill"></i> Roommate Matching</button></li>
+      <li><button onclick="switchTab('room-alloc', this)"><i class="bi bi-door-closed-fill"></i> Room Allocation</button></li>
+      <li><button onclick="switchTab('meal-book', this)"><i class="bi bi-cup-hot-fill"></i> Meal Booking & Menu</button></li>
+      <li><button onclick="switchTab('meal-feedback', this)"><i class="bi bi-star-fill"></i> Meal Feedback</button></li>
+      <li><button onclick="switchTab('fee-track', this)"><i class="bi bi-credit-card-fill"></i> Fee Tracking & History</button></li>
+      <li><button onclick="switchTab('leave-pass', this)"><i class="bi bi-calendar-check-fill"></i> Leave & Gate Pass</button></li>
+      <li><button onclick="switchTab('complaint-desk', this)"><i class="bi bi-tools"></i> Complaint & Maintenance</button></li>
+      <li><button onclick="switchTab('laundry-slot', this)"><i class="bi bi-droplet-half"></i> Laundry Slot Booking</button></li>
+    </ul>
+
+    <div class="p-2 mt-auto rounded-3 d-flex align-items-center gap-2 border border-secondary" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="user-avatar bg-primary text-white" style="width: 36px; height: 36px; font-size: 0.82rem; font-weight: bold;">AK</div>
+      <div class="overflow-hidden">
+        <div class="fw-bold text-white text-truncate" style="font-size: 0.85rem;">Aliza Fayyaz Khan</div>
+        <div class="text-secondary text-truncate" style="font-size: 0.72rem;">aliza@smarthostel.edu</div>
+      </div>
+    </div>
+
+    <a href="home.html" class="text-danger fw-bold text-decoration-none mt-2 d-flex align-items-center gap-2 px-2 py-1 small">
+      <i class="bi bi-box-arrow-left"></i> Logout
+    </a>
+  </aside>
+
+  <main class="main-content flex-grow-1">
+
+    <div class="top-header">
+      <div>
+        <h3 class="header-title text-primary fw-bold mb-1">Student Self-Service Portal</h3>
+        <small class="text-muted">Room C-204 (Girls Wing) | B.Com (Computer Applications)</small>
+      </div>
+      <div class="user-badge bg-white px-3 py-2 rounded-4 border shadow-sm">
+        <div class="user-avatar bg-primary-subtle text-primary fw-bold" style="width: 40px; height: 40px; border-radius: 50%;">AK</div>
+        <div>
+          <div class="fw-bold" style="font-size: 0.95rem;">Aliza Fayyaz Khan</div>
+          <small class="text-muted d-block" style="font-size: 0.75rem;">Resident Student</small>
+        </div>
+      </div>
+    </div>
+
+    <!-- 1. DASHBOARD OVERVIEW TAB -->
+    <div id="student-dash-tab" class="tab-content-panel active-panel">
+      <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #eff6ff; color: #2563eb; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-currency-rupee fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Pending Dues</small>
+              <h5 class="mb-0 fw-bold text-primary" id="stat-dues">₹ 5,000</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #ecfdf5; color: #059669; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-check2-circle fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Today's Meals</small>
+              <h5 class="mb-0 fw-bold text-success">Opted In</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #fefce8; color: #ca8a04; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-ticket-detailed fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Active Tickets</small>
+              <h5 class="mb-0 fw-bold text-warning" id="stat-issues-count">0 Open</h5>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #fdf2f8; color: #db2777; width: 48px; height: 48px; border-radius: 14px;">
+              <i class="bi bi-door-closed fs-5"></i>
+            </div>
+            <div>
+              <small class="text-muted d-block" style="font-size: 0.8rem;">Allotment</small>
+              <h5 class="mb-0 fw-bold" style="color: #be185d;">Room C-204</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Live Notices Section -->
+      <div class="dashboard-card">
+        <h6 class="fw-bold mb-3 d-flex align-items-center gap-2">
+          <i class="bi bi-megaphone-fill text-primary"></i> Campus Circulars
+        </h6>
+        <div class="list-group list-group-flush" id="live-notices-container">
+          <div class="text-center py-3 text-muted">Loading circulars...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. PROFILE MANAGEMENT TAB -->
+    <div id="profile-mgmt-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Resident Student Profile</h5>
+        <form onsubmit="event.preventDefault(); alert('Profile details updated!');" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Full Name</label>
+            <input type="text" class="form-control" value="Aliza Fayyaz Khan" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Academic Course</label>
+            <input type="text" class="form-control" value="B.Com (Computer Applications)" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Hostel Wing & Room</label>
+            <input type="text" class="form-control" value="Block C (Jasmine Girls Wing) - C-204" disabled>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Emergency Contact</label>
+            <input type="tel" class="form-control" value="+91 98550 11223" required>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary px-4">Update Profile</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 3. ADMISSION APPLICATION TAB -->
+    <div id="admission-app-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">New Term Hostel Admission Application</h5>
+        <small class="text-muted d-block mb-3">Submit your preference for room renewal or fresh hostel allocation</small>
+        <form onsubmit="handleAdmissionSubmit(event)" class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Application Year</label>
+            <input type="text" class="form-control" value="Academic Year 2026 - 2027" disabled>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Preferred Room Type</label>
+            <select class="form-select">
+              <option>Triple Sharing (Non-AC) - Standard</option>
+              <option>Double Sharing (AC) - Premium</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Diet Preference</label>
+            <select class="form-select">
+              <option>Standard Vegetarian Mess</option>
+              <option>Special Non-Veg Mess Plan</option>
+            </select>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary px-4">Submit Application</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 4. ROOMMATE MATCH TAB -->
+    <div id="roommate-match-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Roommate Compatibility Preferences</h5>
+        <small class="text-muted d-block mb-3">Configure habits to help the allocation engine match you with compatible peers</small>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Sleep Schedule</label>
+            <select class="form-select">
+              <option>Early Bird (10:00 PM - 06:00 AM)</option>
+              <option>Night Owl (01:00 AM - 08:30 AM)</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Study Environment</label>
+            <select class="form-select">
+              <option>Complete Silence in Room</option>
+              <option>Group Discussion Friendly</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Cleanliness Habit</label>
+            <select class="form-select">
+              <option>Strictly Organized Daily</option>
+              <option>Moderate / Weekend Cleaning</option>
+            </select>
+          </div>
+          <div class="col-12 text-end">
+            <button type="button" class="btn btn-primary px-4" onclick="saveRoommatePreferences()">
+              <i class="bi bi-shuffle me-1"></i> Save Preferences & Run Match
+          </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. ROOM ALLOCATION TAB -->
+    <div id="room-alloc-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Your Allotted Accommodation Details</h5>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <div class="p-3 border rounded-3 bg-light">
+              <small class="text-muted d-block">Wing & Floor</small>
+              <h6 class="fw-bold text-danger mb-0">Block C (Girls) &bull; 2nd Floor</h6>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded-3 bg-light">
+              <small class="text-muted d-block">Room Number</small>
+              <h6 class="fw-bold text-primary mb-0">Room C-204 (Bed 01)</h6>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded-3 bg-light">
+              <small class="text-muted d-block">Roommate</small>
+              <h6 class="fw-bold text-dark mb-0">Priya Joshi (B.Sc IT)</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. MEAL BOOKING TAB -->
+    <div id="meal-book-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Daily Meal Opt-In & Attendance Switcher</h5>
+        <small class="text-muted d-block mb-4">Toggle meal status before the daily cutoff time to reduce food waste</small>
+        <div class="row g-3 text-center">
+          <div class="col-md-4">
+            <div class="p-3 border rounded-3 bg-white">
+              <h6 class="fw-bold">Breakfast</h6>
+              <p class="text-muted small">07:30 AM - 09:30 AM<br>Poha, Upma, Tea, Eggs</p>
+              <div id="label-breakfast" class="small text-success fw-semibold mb-2">Status: Opted In</div>
+              <button id="btn-breakfast" class="btn btn-outline-danger btn-sm" onclick="toggleMealStatus('breakfast')">Skip Meal</button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded-3 bg-white">
+              <h6 class="fw-bold">Lunch</h6>
+              <p class="text-muted small">12:30 PM - 02:30 PM<br>Paneer Butter Masala, Dal, Rice</p>
+              <div id="label-lunch" class="small text-success fw-semibold mb-2">Status: Opted In</div>
+              <button id="btn-lunch" class="btn btn-outline-danger btn-sm" onclick="toggleMealStatus('lunch')">Skip Meal</button>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="p-3 border rounded-3 bg-white">
+              <h6 class="fw-bold">Dinner</h6>
+              <p class="text-muted small">07:45 PM - 09:45 PM<br>Veg Biryani, Mixed Raita</p>
+              <div id="label-dinner" class="small text-success fw-semibold mb-2">Status: Opted In</div>
+              <button id="btn-dinner" class="btn btn-outline-danger btn-sm" onclick="toggleMealStatus('dinner')">Skip Meal</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 7. MEAL FEEDBACK TAB -->
+    <div id="meal-feedback-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Mess Food Quality Rating</h5>
+        <small class="text-muted d-block mb-3">Provide anonymous feedback to the hostel dining committee</small>
+        <form onsubmit="handleFeedbackSubmit(event)" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Meal Type</label>
+            <select class="form-select">
+              <option>Today's Lunch</option>
+              <option>Today's Breakfast</option>
+              <option>Yesterday's Dinner</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Rating</label>
+            <select class="form-select">
+              <option>⭐⭐⭐⭐⭐ - Excellent</option>
+              <option>⭐⭐⭐⭐ - Good</option>
+              <option>⭐⭐⭐ - Average</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label small fw-bold">Feedback Remarks</label>
+            <textarea id="feedbackText" class="form-control" rows="2" placeholder="Write feedback regarding hygiene, taste, or portion size..." required></textarea>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary px-4">Submit Feedback</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- 8. FEE TRACKING TAB -->
+    <div id="fee-track-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h5 class="fw-bold mb-0">Hostel Fee Ledger & Payment Desk</h5>
+            <small class="text-muted">Total Term Fee: ₹ 37,000 &bull; Paid So Far: ₹ 32,000</small>
+          </div>
+          <span id="fee-badge" class="badge bg-warning text-dark px-3 py-2">Pending Dues: ₹ 5,000</span>
+        </div>
+
+        <div class="p-4 border rounded-4 bg-light d-flex justify-content-between align-items-center mb-4 shadow-sm">
+          <div>
+            <small class="text-muted d-block fw-bold">OUTSTANDING SEMESTER BALANCE</small>
+            <span id="fee-amount" class="text-danger fw-bold fs-3">₹ 5,000</span>
+            <small class="text-muted d-block mt-1">Due Date: 31st August 2026</small>
+          </div>
+          <div>
+            <button id="pay-btn" class="btn btn-primary btn-lg px-4" data-bs-toggle="modal" data-bs-target="#paymentModal">
+              <i class="bi bi-shield-lock-fill me-2"></i>Pay ₹ 5,000 Now
+            </button>
+          </div>
+        </div>
+
+        <h6 class="fw-bold mb-2">Payment Transaction History</h6>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Receipt ID</th><th>Description</th><th>Amount</th><th>Date</th><th>Payment Mode</th><th>Status</th></tr>
+          </thead>
+          <tbody id="payment-history-body">
+            <tr><td>#REC-4102</td><td>Hostel Room Rent (Triple Non-AC)</td><td>₹ 22,000</td><td>15 Jul 2026</td><td>Net Banking</td><td><span class="badge bg-success">PAID</span></td></tr>
+            <tr><td>#REC-4103</td><td>Semester Mess Advance</td><td>₹ 10,000</td><td>15 Jul 2026</td><td>UPI Gateway</td><td><span class="badge bg-success">PAID</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 9. LEAVE PASS TAB -->
+    <div id="leave-pass-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Apply for Outpass / Overnight Leave</h5>
+        <small class="text-muted d-block mb-3">Requests require warden approval before departure</small>
+
+        <form onsubmit="handleApplyLeave(event)" class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Destination Address</label>
+            <input type="text" id="leaveDest" class="form-control" placeholder="e.g. Hometown (Pune)" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small fw-bold">Departure Date</label>
+            <input type="date" id="leaveStart" class="form-control" required>
+          </div>
+          <div class="col-md-3">
+            <label class="form-label small fw-bold">Return Date</label>
+            <input type="date" id="leaveEnd" class="form-control" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Parent Contact Number</label>
+            <input type="tel" id="leaveContact" class="form-control" value="+91 98550 11223" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Reason for Leave</label>
+            <input type="text" id="leaveReason" class="form-control" placeholder="e.g. Weekend family visit" required>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary px-4">Submit Outpass Request</button>
+          </div>
+        </form>
+
+        <h6 class="fw-bold mb-2">Gate Pass History</h6>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Pass ID</th><th>Destination</th><th>Dates</th><th>Emergency Contact</th><th>Status</th></tr>
+          </thead>
+          <tbody id="leave-table-body">
+            <!-- Dynamically populated from SQLite via API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 10. COMPLAINT DESK TAB -->
+    <div id="complaint-desk-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Lodge Maintenance Ticket</h5>
+        <small class="text-muted d-block mb-3">Report electrical, plumbing, or carpenter issues for Room C-204</small>
+
+        <form onsubmit="handleLodgeComplaint(event)" class="row g-3 mb-4">
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Issue Category</label>
+            <select id="complaintCategory" class="form-select">
+              <option>Electrical (Fan, Light, Socket)</option>
+              <option>Plumbing (Tap, Shower, Flush)</option>
+              <option>Carpentry (Door, Cupboard, Bed)</option>
+              <option>Wi-Fi & Internet Connectivity</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label small fw-bold">Priority Level</label>
+            <select id="complaintPriority" class="form-select">
+              <option>MEDIUM</option>
+              <option>HIGH</option>
+              <option>LOW</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label small fw-bold">Detailed Issue Description</label>
+            <textarea id="complaintDesc" class="form-control" rows="2" placeholder="State the exact problem in your room..." required></textarea>
+          </div>
+          <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary px-4">Lodge Ticket</button>
+          </div>
+        </form>
+
+        <h6 class="fw-bold mb-2">Your Maintenance Tickets</h6>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Ticket ID</th><th>Category</th><th>Description</th><th>Priority</th><th>Status</th></tr>
+          </thead>
+          <tbody id="complaints-table-body">
+            <!-- Dynamically populated from SQLite via API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- 11. LAUNDRY SLOT TAB -->
+    <div id="laundry-slot-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-1">Hostel Washing Machine Slot Booking</h5>
+        <small class="text-muted d-block mb-3">Reserve an automated washing machine in Block C laundry area</small>
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Select Date</label>
+            <input type="date" class="form-control" value="2026-08-23">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label small fw-bold">Time Slot</label>
+            <select class="form-select">
+              <option>08:00 AM - 09:30 AM (Machine 1)</option>
+              <option>10:00 AM - 11:30 AM (Machine 2)</option>
+              <option>04:00 PM - 05:30 PM (Machine 1)</option>
+            </select>
+          </div>
+          <div class="col-md-4 d-flex align-items-end">
+            <button type="button" class="btn btn-primary w-100" onclick="alert('Laundry slot reserved successfully!')">Reserve Washing Slot</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Payment Modal -->
+  <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content border-0 shadow-lg rounded-4 p-3">
+        <div class="modal-header border-0 pb-2">
+          <div>
+            <h5 class="fw-bold mb-0 text-primary"><i class="bi bi-shield-check me-2"></i>Campus Online Payment Portal</h5>
+            <small class="text-muted">Student: Aliza Fayyaz Khan (Room C-204)</small>
+          </div>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" id="closePaymentModal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body pt-2">
+          <div class="p-3 bg-light rounded-3 mb-3 d-flex justify-content-between align-items-center">
+            <span class="text-muted fw-bold">Total Amount Payable:</span>
+            <span class="text-primary fw-bold fs-4">₹ 5,000</span>
+          </div>
+
+          <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
+            <li class="nav-item">
+              <button class="nav-link active py-2" id="pill-upi-tab" data-bs-toggle="pill" data-bs-target="#pill-upi" type="button">
+                <i class="bi bi-qr-code-scan d-block mb-1"></i> UPI / QR
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link py-2" id="pill-card-tab" data-bs-toggle="pill" data-bs-target="#pill-card" type="button">
+                <i class="bi bi-credit-card d-block mb-1"></i> Debit / Credit Card
+              </button>
+            </li>
+            <li class="nav-item">
+              <button class="nav-link py-2" id="pill-net-tab" data-bs-toggle="pill" data-bs-target="#pill-net" type="button">
+                <i class="bi bi-bank d-block mb-1"></i> Net Banking
+              </button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="pills-tabContent">
+            <div class="tab-pane fade show active text-center p-2" id="pill-upi">
+              <div class="p-3 border rounded-3 bg-white mb-3 d-inline-block">
+                <div style="width: 140px; height: 140px; background: #eff6ff; border: 2px dashed #2563eb; display: flex; align-items: center; justify-content: center; margin: 0 auto;">
+                  <i class="bi bi-qr-code text-primary fs-1"></i>
+                </div>
+                <small class="text-muted d-block mt-2">Scan with Google Pay, PhonePe, or Paytm</small>
+              </div>
+              <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="e.g. alizakhan@okhdfcbank" value="aliza@upi">
+                <button class="btn btn-outline-primary" type="button">Verify VPA</button>
+              </div>
+              <button class="btn btn-success w-100 py-2 fw-bold" onclick="processPaymentSuccess('UPI Gateway')">Confirm & Pay ₹ 5,000</button>
+            </div>
+
+            <div class="tab-pane fade p-2" id="pill-card">
+              <form onsubmit="event.preventDefault(); processPaymentSuccess('Debit / Credit Card');">
+                <div class="mb-2">
+                  <label class="form-label small fw-bold">Card Number</label>
+                  <div class="input-group">
+                    <span class="input-group-text"><i class="bi bi-credit-card-2-front"></i></span>
+                    <input type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" value="4532 8912 3456 7890" required>
+                  </div>
+                </div>
+                <div class="row g-2 mb-3">
+                  <div class="col-6">
+                    <label class="form-label small fw-bold">Expiry Date</label>
+                    <input type="text" class="form-control" placeholder="MM/YY" value="08/29" required>
+                  </div>
+                  <div class="col-6">
+                    <label class="form-label small fw-bold">CVV</label>
+                    <input type="password" class="form-control" placeholder="123" maxlength="3" value="882" required>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label small fw-bold">Cardholder Name</label>
+                  <input type="text" class="form-control" value="Aliza Fayyaz Khan" required>
+                </div>
+                <button type="submit" class="btn btn-primary w-100 py-2 fw-bold">Authorize Payment ₹ 5,000</button>
+              </form>
+            </div>
+
+            <div class="tab-pane fade p-2" id="pill-net">
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Select Your Bank</label>
+                <select class="form-select">
+                  <option selected>HDFC Bank</option>
+                  <option>State Bank of India (SBI)</option>
+                  <option>ICICI Bank</option>
+                  <option>Axis Bank</option>
+                  <option>Bank of Baroda</option>
+                </select>
+              </div>
+              <p class="text-muted small">You will be securely redirected to your bank's portal to authorize the transaction.</p>
+              <button class="btn btn-primary w-100 py-2 fw-bold" onclick="processPaymentSuccess('Net Banking')">Proceed to Secure Bank Login</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    async function toggleMealStatus(mealType) {
+  const label = document.getElementById(`label-${mealType}`);
+  const btn = document.getElementById(`btn-${mealType}`);
+  if (!label || !btn) return;
+
+  const willSkip = btn.classList.contains('btn-outline-danger');
+  const nextStatus = willSkip ? 'SKIPPED' : 'OPTED_IN';
+
+  try {
+    const res = await fetch('http://127.0.0.1:5000/api/meals/toggle', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: 'student@smarthostel.edu',
+        meal_type: mealType,
+        status: nextStatus
+      })
+    });
+
+    if (res.ok) {
+      if (nextStatus === 'SKIPPED') {
+        label.textContent = 'Status: Opted Out';
+        label.className = 'small text-danger fw-semibold mb-2';
+        btn.textContent = 'Opt Back In';
+        btn.className = 'btn btn-outline-success btn-sm';
+      } else {
+        label.textContent = 'Status: Opted In';
+        label.className = 'small text-success fw-semibold mb-2';
+        btn.textContent = 'Skip Meal';
+        btn.className = 'btn btn-outline-danger btn-sm';
+      }
+    }
+  } catch (err) {
+    console.error('Meal toggle error:', err);
+    alert('Failed to update meal status.');
+  }
+}
+window.saveRoommatePreferences = async function() {
+  const panel = document.getElementById('roommate-match-tab');
+  if (!panel) return;
+
+  const selects = panel.querySelectorAll('select');
+  const sleepVal = selects[0] ? selects[0].value : 'Night Owl';
+  const studyVal = selects[1] ? selects[1].value : 'Silent Study';
+  const cleanVal = selects[2] ? selects[2].value : 'Strictly Clean';
+
+  try {
+    const res = await fetch('http://127.0.0.1:5000/api/roommate-preferences', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        email: 'student@smarthostel.edu',
+        sleep: sleepVal,
+        study: studyVal,
+        cleanliness: cleanVal
+      })
+    });
+
+    const data = await res.json();
+
+    if (res.ok) {
+      alert(
+        `✨ Matching Engine Calculation Complete!\n\n` +
+        `Top Compatible Match: ${data.matched_peer} (${data.peer_course})\n` +
+        `Wing / Room: ${data.peer_room}\n` +
+        `Compatibility Index: ${data.compatibility_score}`
+      );
+    } else {
+      alert('Failed to process roommate preferences.');
+    }
+  } catch (err) {
+    console.error('Roommate match error:', err);
+    alert('Server connection error. Ensure server.py is running.');
+  }
+};
+    // 1. Fetch live Leave Passes
+    async function loadStudentLeaves() {
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/leaves');
+        const leaves = await res.json();
+        const tbody = document.getElementById('leave-table-body');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+        leaves.forEach(item => {
+          const badgeClass = item.status === 'APPROVED' ? 'bg-success' : (item.status === 'REJECTED' ? 'bg-danger' : 'bg-warning text-dark');
+          tbody.insertAdjacentHTML('beforeend', `
+            <tr>
+              <td>#LP-${item.id}</td>
+              <td>${item.destination}</td>
+              <td>${item.start_date} to ${item.end_date}</td>
+              <td>${item.contact || '+91 98550 11223'}</td>
+              <td><span class="badge ${badgeClass}">${item.status}</span></td>
+            </tr>
+          `);
+        });
+      } catch (err) {
+        console.error('Error loading leaves:', err);
+      }
+    }
+
+    // 2. Fetch live Complaints
+    async function loadStudentComplaints() {
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/complaints');
+        const complaints = await res.json();
+        const tbody = document.getElementById('complaints-table-body');
+        const badgeCount = document.getElementById('stat-issues-count');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+        let openCount = 0;
+
+        complaints.forEach(item => {
+          const isResolved = item.status === 'RESOLVED';
+          if (!isResolved) openCount++;
+          const badgeClass = isResolved ? 'bg-success' : 'bg-warning text-dark';
+          tbody.insertAdjacentHTML('beforeend', `
+            <tr>
+              <td>#${item.id}</td>
+              <td>${item.category}</td>
+              <td>${item.description}</td>
+              <td><span class="badge bg-${item.priority === 'HIGH' ? 'danger' : 'secondary'}">${item.priority}</span></td>
+              <td><span class="badge ${badgeClass}">${item.status}</span></td>
+            </tr>
+          `);
+        });
+
+        if (badgeCount) {
+          badgeCount.textContent = `${openCount} Open`;
+        }
+      } catch (err) {
+        console.error('Error loading complaints:', err);
+      }
+    }
+
+    // 3. Fetch live Payment Transactions
+    async function loadTransactions() {
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/transactions');
+        const txs = await res.json();
+        const tbody = document.getElementById('payment-history-body');
+        if (!tbody) return;
+
+        if (txs.length > 0) {
+          tbody.innerHTML = '';
+          let hasMessPaid = false;
+
+          txs.forEach(item => {
+            if (item.amount == 5000 || (item.description && item.description.includes('Semester Mess'))) {
+              hasMessPaid = true;
+            }
+            tbody.insertAdjacentHTML('beforeend', `
+              <tr>
+                <td>${item.receipt_id}</td>
+                <td>${item.description}</td>
+                <td>₹ ${item.amount.toLocaleString()}</td>
+                <td>${item.payment_date ? item.payment_date.split(' ')[0] : 'Today'}</td>
+                <td>${item.payment_mode}</td>
+                <td><span class="badge bg-success">${item.status}</span></td>
+              </tr>
+            `);
+          });
+
+          if (hasMessPaid) {
+            updateDuesToPaid();
+          }
+        }
+      } catch (err) {
+        console.error('Error loading transactions:', err);
+      }
+    }
+
+    function updateDuesToPaid() {
+      const duesStat = document.getElementById('stat-dues');
+      const feeBadge = document.getElementById('fee-badge');
+      const feeAmount = document.getElementById('fee-amount');
+      const payBtn = document.getElementById('pay-btn');
+
+      if (duesStat) duesStat.textContent = '₹ 0';
+      if (feeAmount) {
+        feeAmount.textContent = '₹ 0';
+        feeAmount.classList.remove('text-danger');
+        feeAmount.classList.add('text-success');
+      }
+      if (feeBadge) {
+        feeBadge.textContent = 'All Dues Cleared';
+        feeBadge.className = 'badge bg-success px-3 py-2';
+      }
+      if (payBtn) {
+        payBtn.disabled = true;
+        payBtn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Paid in Full';
+        payBtn.classList.remove('btn-primary');
+        payBtn.classList.add('btn-secondary');
+      }
+    }
+
+    // Process payment via modal
+    window.processPaymentSuccess = async function(mode) {
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/pay-fees', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: 'student@smarthostel.edu',
+            amount: 5000,
+            payment_mode: mode
+          })
+        });
+
+        const data = await res.json();
+        if (res.ok) {
+          const modalEl = document.getElementById('paymentModal');
+          const modalInstance = bootstrap.Modal.getInstance(modalEl);
+          if (modalInstance) modalInstance.hide();
+
+          alert(`Payment of ₹5,000 successful via ${mode}!\nReceipt: ${data.receipt_id}`);
+          updateDuesToPaid();
+          loadTransactions();
+        } else {
+          alert('Payment failed. Please try again.');
+        }
+      } catch (err) {
+        console.error('Payment error:', err);
+        alert('Could not connect to the backend server.');
+      }
+    };
+
+    // 4. Fetch live Notices & Circulars
+    async function loadStudentNotices() {
+      try {
+        const res = await fetch('http://127.0.0.1:5000/api/notices');
+        const notices = await res.json();
+        const container = document.getElementById('live-notices-container');
+        if (!container) return;
+
+        if (!notices || notices.length === 0) {
+          container.innerHTML = '<p class="text-muted text-center py-3 mb-0">No active circulars at this time.</p>';
+          return;
+        }
+
+        container.innerHTML = '';
+        notices.forEach(item => {
+          container.insertAdjacentHTML('beforeend', `
+            <div class="list-group-item p-3 border rounded-3 bg-light mb-2">
+              <div class="d-flex justify-content-between align-items-start mb-1">
+                <h6 class="fw-bold text-primary mb-1">${item.title}</h6>
+                <span class="badge bg-secondary">${item.target}</span>
+              </div>
+              <p class="text-muted small mb-1">${item.message}</p>
+              <small class="text-secondary" style="font-size: 0.72rem;">
+                <i class="bi bi-clock me-1"></i>${item.date_posted || 'Recent'}
+              </small>
+            </div>
+          `);
+        });
+      } catch (err) {
+        console.error('Error loading notices:', err);
+      }
+    }
+
+    // Unified startup listener
+    document.addEventListener('DOMContentLoaded', () => {
+      loadStudentLeaves();
+      loadStudentComplaints();
+      loadTransactions();
+      loadStudentNotices();
+    });
+  </script>
+</body>
+</html>

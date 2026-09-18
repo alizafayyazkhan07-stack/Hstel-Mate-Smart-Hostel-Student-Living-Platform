@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In - HostelMate</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    :root {
+      --primary-purple: #5c4df2;
+      --primary-purple-hover: #4b3ce0;
+      --bg-page: #f5f4fa;
+      --bg-card: #ffffff;
+      --text-main: #1e1b4b;
+      --text-muted: #64748b;
+      --border-color: #e8e7f0;
+      --input-bg: #f8f8fc;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    /* Lock the viewport height and prevent scrolling */
+    html, body {
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    body {
+      background-color: var(--bg-page);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    /* Compact card dimensions */
+    .login-container {
+      background: var(--bg-card);
+      width: 100%;
+      max-width: 440px;
+      border-radius: 28px;
+      padding: 1.8rem 2.2rem;
+      box-shadow: 0 20px 50px -15px rgba(92, 77, 242, 0.08), 0 8px 16px -5px rgba(0, 0, 0, 0.03);
+    }
+
+    .login-header h1 {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-bottom: 0.2rem;
+    }
+
+    .login-header p {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      display: block;
+    }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 0.65rem;
+      margin-bottom: 0.85rem;
+    }
+
+    .role-btn {
+      background: #ffffff;
+      border: 1.5px solid var(--border-color);
+      border-radius: 16px;
+      padding: 0.75rem 0.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #334155;
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    .role-btn .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #f1f0fa;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #64748b;
+      transition: all 0.2s ease;
+    }
+
+    .role-btn:hover {
+      border-color: #cbd5e1;
+      transform: translateY(-2px);
+    }
+
+    .role-btn.active {
+      background: var(--primary-purple);
+      border-color: var(--primary-purple);
+      color: #ffffff;
+      box-shadow: 0 8px 18px -4px rgba(92, 77, 242, 0.4);
+    }
+
+    .role-btn.active .icon-box {
+      background: rgba(255, 255, 255, 0.2);
+      color: #ffffff;
+    }
+
+    .demo-pill {
+      background: #ffffff;
+      border: 1.5px solid #f1f0fa;
+      border-radius: 50px;
+      padding: 0.5rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: #475569;
+      margin-bottom: 0.9rem;
+    }
+
+    .demo-pill i {
+      color: var(--primary-purple);
+      font-size: 0.95rem;
+    }
+
+    .demo-pill strong {
+      color: #0f172a;
+    }
+
+    .input-group-custom {
+      margin-bottom: 0.8rem;
+    }
+
+    .input-wrap {
+      background: var(--input-bg);
+      border: 1.5px solid transparent;
+      border-radius: 14px;
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      transition: all 0.2s ease;
+    }
+
+    .input-wrap:focus-within {
+      border-color: var(--primary-purple);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(92, 77, 242, 0.1);
+    }
+
+    .input-wrap i {
+      color: #94a3b8;
+      font-size: 1rem;
+    }
+
+    .input-wrap input {
+      border: none;
+      background: transparent;
+      outline: none;
+      width: 100%;
+      font-size: 0.92rem;
+      color: #0f172a;
+      font-weight: 500;
+    }
+
+    .toggle-password {
+      cursor: pointer;
+      color: #94a3b8;
+      font-size: 1rem;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary-purple);
+      color: #ffffff;
+      border: none;
+      border-radius: 14px;
+      padding: 0.85rem;
+      font-size: 0.98rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      margin-top: 1.1rem;
+      box-shadow: 0 8px 18px -4px rgba(92, 77, 242, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-purple-hover);
+      transform: translateY(-1px);
+    }
+
+    .back-home {
+      display: block;
+      text-align: center;
+      margin-top: 0.9rem;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .back-home:hover {
+      color: var(--primary-purple);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-container">
+
+    <div class="login-header">
+      <h1>Welcome back 👋</h1>
+      <p>Sign in to continue to your dashboard</p>
+    </div>
+
+    <form onsubmit="handleFormSubmit(event)">
+
+      <span class="section-label">LOGIN AS</span>
+      <div class="role-grid">
+
+        <div class="role-btn active" id="btn-owner" onclick="selectRole('owner')">
+          <div class="icon-box"><i class="bi bi-buildings"></i></div>
+          <span>Owner</span>
+        </div>
+
+        <div class="role-btn" id="btn-rector" onclick="selectRole('rector')">
+          <div class="icon-box"><i class="bi bi-person"></i></div>
+          <span>Rector</span>
+        </div>
+
+        <div class="role-btn" id="btn-student" onclick="selectRole('student')">
+          <div class="icon-box"><i class="bi bi-mortarboard"></i></div>
+          <span>Student</span>
+        </div>
+
+      </div>
+
+      <div class="demo-pill">
+        <i class="bi bi-stars"></i>
+        <span>Demo credentials auto-filled for <strong id="demo-role-name">Owner</strong></span>
+      </div>
+
+      <div class="input-group-custom">
+        <span class="section-label">EMAIL</span>
+        <div class="input-wrap">
+          <i class="bi bi-person"></i>
+          <input type="email" id="userEmail" value="admin@smarthostel.edu" required>
+        </div>
+      </div>
+
+      <div class="input-group-custom">
+        <span class="section-label">PASSWORD</span>
+        <div class="input-wrap">
+          <i class="bi bi-lock"></i>
+          <input type="password" id="userPassword" value="admin123" required>
+          <i class="bi bi-eye toggle-password" onclick="togglePasswordVisibility()" id="eyeIcon"></i>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit" id="submitBtn">
+        <span id="btnText">Sign In as Owner</span> <i class="bi bi-arrow-right"></i>
+      </button>
+
+      <a href="home.html" class="back-home">← Return to Homepage</a>
+    </form>
+
+  </div>
+
+  <script>
+    const roleCredentials = {
+      owner: {
+        name: 'Owner',
+        email: 'admin@smarthostel.edu',
+        defaultPass: 'admin123',
+        target: 'admindashboard.html'
+      },
+      rector: {
+        name: 'Rector',
+        email: 'rector@smarthostel.edu',
+        defaultPass: 'rector123',
+        target: 'rector.html'
+      },
+      student: {
+        name: 'Student',
+        email: 'student@smarthostel.edu',
+        defaultPass: 'password123',
+        target: 'studdashboard.html'
+      }
+    };
+
+    let activeRole = 'owner';
+
+    function selectRole(role) {
+      activeRole = role;
+
+      document.getElementById('btn-owner').classList.remove('active');
+      document.getElementById('btn-rector').classList.remove('active');
+      document.getElementById('btn-student').classList.remove('active');
+      document.getElementById(`btn-${role}`).classList.add('active');
+
+      const current = roleCredentials[role];
+      document.getElementById('demo-role-name').innerText = current.name;
+      document.getElementById('userEmail').value = current.email;
+      document.getElementById('userPassword').value = current.defaultPass;
+      document.getElementById('btnText').innerText = `Sign In as ${current.name}`;
+    }
+
+    function togglePasswordVisibility() {
+      const passInput = document.getElementById('userPassword');
+      const eyeIcon = document.getElementById('eyeIcon');
+      if (passInput.type === 'password') {
+        passInput.type = 'text';
+        eyeIcon.classList.replace('bi-eye', 'bi-eye-slash');
+      } else {
+        passInput.type = 'password';
+        eyeIcon.classList.replace('bi-eye-slash', 'bi-eye');
+      }
+    }
+
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const email = document.getElementById('userEmail').value.trim();
+      const password = document.getElementById('userPassword').value.trim();
+      const submitBtn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('btnText');
+
+      submitBtn.disabled = true;
+      btnText.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Signing in...';
+
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.success) {
+          sessionStorage.setItem('hostel_user', JSON.stringify(data));
+
+          const normalizedRole = (data.role || '').toLowerCase();
+          if (normalizedRole === 'student') {
+            window.location.href = 'studdashboard.html';
+          } else if (normalizedRole === 'rector') {
+            window.location.href = 'rector.html';
+          } else if (normalizedRole === 'owner' || normalizedRole === 'admin') {
+            window.location.href = 'admindashboard.html';
+          } else {
+            window.location.href = roleCredentials[activeRole].target;
+          }
+        } else {
+          alert(data.message || 'Invalid email or password. Please verify credentials.');
+        }
+      } catch (err) {
+        console.error('Login error:', err);
+        alert('Server unreachable. Make sure server.py is running on port 5000.');
+      } finally {
+        submitBtn.disabled = false;
+        btnText.innerText = `Sign In as ${roleCredentials[activeRole].name}`;
+      }
+    }
+  </script>
+</body>
+</html>

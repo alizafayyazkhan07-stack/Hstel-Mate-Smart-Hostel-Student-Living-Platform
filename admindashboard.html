@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HostelMate - Admin & Owner Console</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="d-flex min-vh-100 bg-light">
+
+  <aside class="fixed-sidebar">
+    <div class="sidebar-brand">
+      <div class="user-avatar bg-primary text-white" style="width: 36px; height: 36px; border-radius: 10px;">
+        <i class="bi bi-sparkles"></i>
+      </div>
+      <div>
+        <div class="fw-bold fs-6">HostelMate</div>
+        <small class="text-success" style="font-size: 0.72rem;">● Owner Panel</small>
+      </div>
+    </div>
+
+    <small class="text-uppercase text-secondary fw-bold px-2 mb-2 d-block" style="font-size: 0.72rem; letter-spacing: 0.8px;">Menu</small>
+
+    <ul class="sidebar-nav">
+      <li><button class="active" onclick="switchTab('dashboard', this)"><i class="bi bi-grid-fill"></i> Dashboard</button></li>
+      <li><button onclick="switchTab('students', this)"><i class="bi bi-people-fill"></i> Manage Students</button></li>
+      <li><button onclick="switchTab('rectors', this)"><i class="bi bi-person-badge-fill"></i> Manage Rectors</button></li>
+      <li><button onclick="switchTab('blocks', this)"><i class="bi bi-buildings-fill"></i> Manage Hostel Blocks</button></li>
+      <li><button onclick="switchTab('rooms', this)"><i class="bi bi-door-open-fill"></i> Manage Rooms</button></li>
+      <li><button onclick="switchTab('fees', this)"><i class="bi bi-currency-rupee"></i> Manage Fee Structure</button></li>
+      <li><button onclick="switchTab('meals', this)"><i class="bi bi-cup-hot-fill"></i> Manage Meal Categories</button></li>
+      <li><button onclick="switchTab('complaints', this)"><i class="bi bi-chat-left-dots-fill"></i> Complaints</button></li>
+      <li><button onclick="switchTab('notices', this)"><i class="bi bi-megaphone-fill"></i> Notices</button></li>
+      <li><button onclick="switchTab('users', this)"><i class="bi bi-person-gear"></i> User Management</button></li>
+      <li><button onclick="switchTab('reports', this)"><i class="bi bi-bar-chart-line-fill"></i> Reports & Analytics</button></li>
+      <li><button onclick="switchTab('settings', this)"><i class="bi bi-gear-fill"></i> System Settings</button></li>
+      <li><button onclick="switchTab('backup', this)"><i class="bi bi-database-fill-check"></i> Database Backup</button></li>
+    </ul>
+
+    <div class="p-2 mt-auto rounded-3 d-flex align-items-center gap-2 border border-secondary" style="background: rgba(255, 255, 255, 0.05);">
+      <div class="user-avatar bg-primary text-white" style="width: 34px; height: 34px; font-size: 0.8rem;">AK</div>
+      <div class="overflow-hidden">
+        <div class="fw-bold text-white text-truncate" style="font-size: 0.85rem;">Aliza Khan</div>
+        <div class="text-secondary text-truncate" style="font-size: 0.75rem;">aliza@gmail.com</div>
+      </div>
+    </div>
+
+    <a href="home.html" class="text-danger fw-bold text-decoration-none mt-2 d-flex align-items-center gap-2 px-2 py-1 small">
+      <i class="bi bi-box-arrow-left"></i> Logout
+    </a>
+  </aside>
+
+  <main class="main-content flex-grow-1">
+
+    <div class="top-header">
+      <div class="d-flex align-items-center gap-2">
+        <i class="bi bi-layout-sidebar-inset text-muted fs-5"></i>
+        <h2 class="header-title" id="adminTopTitle">Owner Dashboard</h2>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <div class="user-avatar" style="width: 38px; height: 38px; background: #f1f5f9; color: #475569;">
+          <i class="bi bi-bell"></i>
+        </div>
+        <div class="user-badge bg-white px-3 py-1 rounded-pill border">
+          <div class="user-avatar bg-primary text-white" style="width: 28px; height: 28px; font-size: 0.75rem;">AK</div>
+          <span class="fw-bold small">Aliza Khan</span>
+          <i class="bi bi-chevron-down text-muted small"></i>
+        </div>
+      </div>
+    </div>
+
+    <div id="dashboard-tab" class="tab-content-panel active-panel">
+
+      <div class="row g-4 mb-4">
+        <div class="col-xl-3 col-md-6">
+          <div class="p-4 rounded-4 text-white" style="background: linear-gradient(135deg, #7c3aed 0%, #6366f1 100%);">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="user-avatar text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-people"></i></div>
+              <small class="text-uppercase fw-bold text-white-50">Total Students</small>
+            </div>
+            <h2 class="fw-bold mb-1">35</h2>
+            <small class="text-white-50">Enrolled in hostel</small>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="p-4 rounded-4 text-white" style="background: linear-gradient(135deg, #f97316 0%, #ec4899 100%);">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="user-avatar text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-currency-rupee"></i></div>
+              <small class="text-uppercase fw-bold text-white-50">Pending Fees</small>
+            </div>
+            <h2 class="fw-bold mb-1" id="admin-total-collected">₹0</h2>
+            <small class="text-white-50" id="admin-collected-sub">Total revenue collected</small>
+            <small class="text-white-50">From 25 students</small>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="p-4 rounded-4 text-white" style="background: linear-gradient(135deg, #ef4444 0%, #f43f5e 100%);">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="user-avatar text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-chat-left-dots"></i></div>
+              <small class="text-uppercase fw-bold text-white-50">Active Complaints</small>
+            </div>
+            <h2 class="fw-bold mb-1" id="admin-active-complaints">0</h2>
+            <small class="text-white-50">Pending resolution</small>
+          </div>
+        </div>
+
+        <div class="col-xl-3 col-md-6">
+          <div class="p-4 rounded-4 text-white" style="background: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+              <div class="user-avatar text-white" style="background: rgba(255,255,255,0.2);"><i class="bi bi-door-open"></i></div>
+              <small class="text-uppercase fw-bold text-white-50">Occupied Rooms</small>
+            </div>
+            <h2 class="fw-bold mb-1">35</h2>
+            <small class="text-white-50">of 120 total rooms</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-lg-7">
+          <div class="dashboard-card h-100">
+            <h5 class="fw-bold mb-1">Fee Status Breakdown</h5>
+            <small class="text-muted d-block mb-4">Paid: 10 &bull; Pending: 14 &bull; Partial: 11</small>
+
+            <div class="d-flex align-items-end justify-content-around border-bottom pb-2" style="height: 250px;">
+              <div class="text-center" style="width: 25%;">
+                <div style="height: 140px; background: #10b981; border-radius: 8px 8px 0 0; width: 80%; margin: 0 auto;"></div>
+                <small class="text-muted fw-bold d-block mt-2">Paid</small>
+              </div>
+              <div class="text-center" style="width: 25%;">
+                <div style="height: 210px; background: #f59e0b; border-radius: 8px 8px 0 0; width: 80%; margin: 0 auto;"></div>
+                <small class="text-muted fw-bold d-block mt-2">Pending</small>
+              </div>
+              <div class="text-center" style="width: 25%;">
+                <div style="height: 165px; background: #2563eb; border-radius: 8px 8px 0 0; width: 80%; margin: 0 auto;"></div>
+                <small class="text-muted fw-bold d-block mt-2">Partial</small>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-5">
+          <div class="dashboard-card h-100 text-center">
+            <h5 class="fw-bold text-start mb-1">Complaint Status</h5>
+            <small class="text-muted text-start d-block mb-3">Real-time ticket distributions</small>
+
+            <div class="d-flex align-items-center justify-content-center my-4" style="height: 180px;">
+              <svg width="170" height="170" viewBox="0 0 42 42">
+                <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f1f5f9" stroke-width="6"></circle>
+                <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#10b981" stroke-width="6" stroke-dasharray="85 15" stroke-dashoffset="25"></circle>
+                <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#2563eb" stroke-width="6" stroke-dasharray="10 90" stroke-dashoffset="40"></circle>
+                <circle cx="21" cy="21" r="15.91549430918954" fill="transparent" stroke="#f59e0b" stroke-width="6" stroke-dasharray="5 95" stroke-dashoffset="50"></circle>
+              </svg>
+            </div>
+
+            <div class="d-flex justify-content-center gap-3 small fw-bold">
+              <span><span class="text-warning">●</span> Pending</span>
+              <span><span class="text-primary">●</span> In Progress</span>
+              <span><span class="text-success">●</span> Resolved</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="students-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h5 class="fw-bold mb-0">Enrolled Resident Students</h5>
+            <small class="text-muted">Master database of all active student profiles</small>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="alert('Student Enrollment Modal triggered!')">
+            <i class="bi bi-plus-circle me-1"></i> Register Student
+          </button>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead class="table-light">
+              <tr><th>Reg ID</th><th>Student Name</th><th>Course</th><th>Block / Room</th><th>Contact</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>#ST-8801</td><td class="fw-bold">Aliza Fayyaz Khan</td><td>B.Com (Computer Applications)</td><td><span class="badge bg-danger-subtle text-danger border">Block C (C-204)</span></td><td>9855011223</td><td><span class="badge bg-success">ACTIVE</span></td></tr>
+              <tr><td>#ST-8802</td><td class="fw-bold">Aman Gupta</td><td>B.Tech Computer Science</td><td><span class="badge bg-primary-subtle text-primary border">Block A (A-102)</span></td><td>9876543210</td><td><span class="badge bg-success">ACTIVE</span></td></tr>
+              <tr><td>#ST-8803</td><td class="fw-bold">Priya Joshi</td><td>B.Sc Information Tech</td><td><span class="badge bg-danger-subtle text-danger border">Block C (C-205)</span></td><td>9811223344</td><td><span class="badge bg-success">ACTIVE</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div id="rectors-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <div>
+            <h5 class="fw-bold mb-0">Hostel Wardens & Rectors</h5>
+            <small class="text-muted">Assigned staff authorities per campus wing</small>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="alert('Add Rector Modal triggered!')">
+            <i class="bi bi-person-plus me-1"></i> Add Rector
+          </button>
+        </div>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Rector Name</th><th>Assigned Wing</th><th>Phone</th><th>Email</th><th>Action</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="fw-bold">Dr. Suresh Kulkarni</td><td>Boys Hostels (Blocks A & B)</td><td>+91 98220 11001</td><td>rector.boys@smarthostel.edu</td><td><button class="btn btn-outline-primary btn-sm">Edit</button></td></tr>
+            <tr><td class="fw-bold">Mrs. Sunita Deshmukh</td><td>Girls Hostels (Blocks C & D)</td><td>+91 98220 11002</td><td>rector.girls@smarthostel.edu</td><td><button class="btn btn-outline-primary btn-sm">Edit</button></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="blocks-tab" class="tab-content-panel">
+
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <h4 class="fw-bold mb-1"><i class="bi bi-buildings-fill text-primary me-2"></i>Hostel Block Infrastructure</h4>
+          <p class="text-muted small mb-0">Wing segregation, bed occupancy monitoring, and block administrative oversight.</p>
+        </div>
+        <button class="btn btn-primary btn-sm px-3" onclick="alert('Add New Hostel Block Modal triggered!')">
+          <i class="bi bi-plus-circle me-1"></i> Add New Block
+        </button>
+      </div>
+
+      <div class="row g-3 mb-4">
+        <div class="col-md-3">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #eff6ff; color: #2563eb;"><i class="bi bi-gender-male fs-5"></i></div>
+            <div>
+              <small class="text-muted d-block">Boys Capacity</small>
+              <h6 class="mb-0 fw-bold text-primary">185 / 200 Beds</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #fdf2f8; color: #db2777;"><i class="bi bi-gender-female fs-5"></i></div>
+            <div>
+              <small class="text-muted d-block">Girls Capacity</small>
+              <h6 class="mb-0 fw-bold text-danger">215 / 220 Beds</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #ecfdf5; color: #059669;"><i class="bi bi-door-closed fs-5"></i></div>
+            <div>
+              <small class="text-muted d-block">Total Rooms</small>
+              <h6 class="mb-0 fw-bold text-success">140 Rooms</h6>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="dashboard-card mb-0 p-3 d-flex align-items-center gap-3">
+            <div class="user-avatar" style="background: #fefce8; color: #ca8a04;"><i class="bi bi-pie-chart fs-5"></i></div>
+            <div>
+              <small class="text-muted d-block">Overall Rate</small>
+              <h6 class="mb-0 fw-bold text-warning">95.2% Full</h6>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-card mb-4" style="border: 1.5px solid #bfdbfe; background: #fafcff;">
+        <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom" style="border-color: #dbeafe !important;">
+          <div class="d-flex align-items-center gap-2">
+            <div class="p-2 rounded-3 text-white" style="background: #2563eb;">
+              <i class="bi bi-gender-male fs-5"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-0 text-primary">Boys Hostel Infrastructure</h5>
+              <small class="text-muted">Blocks A & B &bull; Supervised by Prof. Suresh Kulkarni</small>
+            </div>
+          </div>
+          <span class="badge" style="background: #2563eb; font-size: 0.82rem; padding: 0.5rem 0.9rem;">
+            Occupancy: 92.5%
+          </span>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="p-3 bg-white rounded-3 border" style="border-color: #bfdbfe !important;">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="fw-bold text-primary mb-0">Block A (Mustang Wing)</h6>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">85 / 100 Beds</span>
+              </div>
+              <small class="text-muted d-block mb-2">4 Floors &bull; 40 Rooms &bull; Wi-Fi & Gymnasium</small>
+
+              <div class="progress mb-3" style="height: 6px; background-color: #eff6ff;">
+                <div class="progress-bar bg-primary" style="width: 85%;"></div>
+              </div>
+
+              <table class="table table-sm table-bordered align-middle small mb-0">
+                <thead class="table-light">
+                  <tr><th>Room No</th><th>Category</th><th>Allotted Residents</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="text-primary">A-101</strong></td>
+                    <td>Double AC</td>
+                    <td>Aman Gupta, Mohd Faaz Khan</td>
+                    <td><span class="badge bg-success">Full</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-primary">A-102</strong></td>
+                    <td>Triple Non-AC</td>
+                    <td>Rahul Sharma, Rohan Verma</td>
+                    <td><span class="badge bg-warning text-dark">1 Vacant</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="p-3 bg-white rounded-3 border" style="border-color: #bfdbfe !important;">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="fw-bold text-primary mb-0">Block B (Jaguar Wing)</h6>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">100 / 100 Beds</span>
+              </div>
+              <small class="text-muted d-block mb-2">4 Floors &bull; 40 Rooms &bull; Reading Room Enabled</small>
+
+              <div class="progress mb-3" style="height: 6px; background-color: #eff6ff;">
+                <div class="progress-bar bg-primary" style="width: 100%;"></div>
+              </div>
+
+              <table class="table table-sm table-bordered align-middle small mb-0">
+                <thead class="table-light">
+                  <tr><th>Room No</th><th>Category</th><th>Allotted Residents</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="text-primary">B-201</strong></td>
+                    <td>Double AC</td>
+                    <td>Vikas Dubey, Sameer Patel</td>
+                    <td><span class="badge bg-success">Full</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-primary">B-202</strong></td>
+                    <td>Double Non-AC</td>
+                    <td>Tanmay Roy, Danish Ali</td>
+                    <td><span class="badge bg-success">Full</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="dashboard-card" style="border: 1.5px solid #fbcfe8; background: #fffafc;">
+        <div class="d-flex justify-content-between align-items-center pb-3 mb-3 border-bottom" style="border-color: #fce7f3 !important;">
+          <div class="d-flex align-items-center gap-2">
+            <div class="p-2 rounded-3 text-white" style="background: #db2777;">
+              <i class="bi bi-gender-female fs-5"></i>
+            </div>
+            <div>
+              <h5 class="fw-bold mb-0 text-danger">Girls Hostel Infrastructure</h5>
+              <small class="text-muted">Blocks C & D &bull; Supervised by Mrs. Sunita Deshmukh</small>
+            </div>
+          </div>
+          <span class="badge" style="background: #db2777; font-size: 0.82rem; padding: 0.5rem 0.9rem;">
+            Occupancy: 97.7%
+          </span>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-lg-6">
+            <div class="p-3 bg-white rounded-3 border" style="border-color: #fbcfe8 !important;">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="fw-bold text-danger mb-0">Block C (Jasmine Wing)</h6>
+                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">115 / 120 Beds</span>
+              </div>
+              <small class="text-muted d-block mb-2">5 Floors &bull; 50 Rooms &bull; 24/7 Gate & Bio-Attendance</small>
+
+              <div class="progress mb-3" style="height: 6px; background-color: #fdf2f8;">
+                <div class="progress-bar bg-danger" style="width: 95.8%;"></div>
+              </div>
+
+              <table class="table table-sm table-bordered align-middle small mb-0">
+                <thead class="table-light">
+                  <tr><th>Room No</th><th>Category</th><th>Allotted Residents</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="text-danger">C-204</strong></td>
+                    <td>Triple Non-AC</td>
+                    <td>Aliza Fayyaz Khan, Priya Joshi</td>
+                    <td><span class="badge bg-warning text-dark">1 Vacant</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-danger">C-205</strong></td>
+                    <td>Double AC</td>
+                    <td>Neha Kulkarni, Ritu Sharma</td>
+                    <td><span class="badge bg-success">Full</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="p-3 bg-white rounded-3 border" style="border-color: #fbcfe8 !important;">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="fw-bold text-danger mb-0">Block D (Tulip Wing)</h6>
+                <span class="badge bg-danger-subtle text-danger border border-danger-subtle">100 / 100 Beds</span>
+              </div>
+              <small class="text-muted d-block mb-2">4 Floors &bull; 40 Rooms &bull; Dining & Recreation Hall</small>
+
+              <div class="progress mb-3" style="height: 6px; background-color: #fdf2f8;">
+                <div class="progress-bar bg-danger" style="width: 100%;"></div>
+              </div>
+
+              <table class="table table-sm table-bordered align-middle small mb-0">
+                <thead class="table-light">
+                  <tr><th>Room No</th><th>Category</th><th>Allotted Residents</th><th>Status</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong class="text-danger">D-101</strong></td>
+                    <td>Double AC</td>
+                    <td>Kavita Sen, Ananya Roy</td>
+                    <td><span class="badge bg-success">Full</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong class="text-danger">D-102</strong></td>
+                    <td>Double Non-AC</td>
+                    <td>Pooja Hegde, Sanya Mirza</td>
+                    <td><span class="badge bg-success">Full</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div id="rooms-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Hostel Room Directory</h5>
+        <table class="table table-bordered align-middle">
+          <thead class="table-light">
+            <tr><th>Room No</th><th>Wing</th><th>Capacity</th><th>Occupancy</th><th>Category</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>A-101</strong></td><td>Boys (Block A)</td><td>2 Beds</td><td><span class="badge bg-success">2 Occupied (Full)</span></td><td>AC Double Sharing</td></tr>
+            <tr><td><strong>C-204</strong></td><td>Girls (Block C)</td><td>3 Beds</td><td><span class="badge bg-warning text-dark">2 / 3 (1 Bed Available)</span></td><td>Non-AC Triple</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="fees-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Semester Fee Configuration</h5>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Room Category</th><th>Hostel Rent / Sem</th><th>Mess Charges / Sem</th><th>Total Dues</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Double Sharing AC</td><td>₹ 35,000</td><td>₹ 15,000</td><td><strong class="text-primary">₹ 50,000</strong></td></tr>
+            <tr><td>Triple Sharing Non-AC</td><td>₹ 22,000</td><td>₹ 15,000</td><td><strong class="text-primary">₹ 37,000</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="meals-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Mess Diet & Meal Timings</h5>
+        <ul class="list-group">
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div><strong>Breakfast:</strong> 07:30 AM - 09:30 AM (Poha, Upma, Tea, Eggs/Bananas)</div>
+            <span class="badge bg-primary">Active</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div><strong>Lunch:</strong> 12:30 PM - 02:30 PM (Paneer Butter Masala, Dal Tadka, Rice, Chapati)</div>
+            <span class="badge bg-primary">Active</span>
+          </li>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div><strong>Dinner:</strong> 07:45 PM - 09:45 PM (Veg/Chicken Biryani, Raita)</div>
+            <span class="badge bg-primary">Active</span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="complaints-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">Maintenance & Resolution Log</h5>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>ID</th><th>Student</th><th>Room</th><th>Issue</th><th>Priority</th><th>Status</th></tr>
+          </thead>
+          <tbody id="adminComplaintsTableBody">
+            <!-- Dynamically populated from SQLite via API -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="notices-tab" class="tab-content-panel">
+      <div class="row g-4">
+        <!-- Publish Form -->
+        <div class="col-lg-5">
+          <div class="dashboard-card">
+            <h5 class="fw-bold mb-3"><i class="bi bi-megaphone-fill text-primary me-2"></i>Post New Notice</h5>
+            <form id="noticePublishForm" onsubmit="publishNotice(event)">
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Title</label>
+                <input type="text" id="noticeTitle" class="form-control" placeholder="e.g. Wi-Fi Maintenance Downtime" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Target Audience</label>
+                <select id="noticeTarget" class="form-select">
+                  <option value="ALL">All Residents & Staff</option>
+                  <option value="STUDENTS">Students Only</option>
+                  <option value="RECTORS">Rectors & Wardens Only</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label small fw-bold">Message</label>
+                <textarea id="noticeMessage" class="form-control" rows="4" placeholder="Enter notice details..." required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                <i class="bi bi-send-fill me-1"></i> Broadcast Notice
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Live Feed -->
+        <div class="col-lg-7">
+          <div class="dashboard-card">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-bold mb-0">Active Campus Circulars</h5>
+              <button class="btn btn-outline-secondary btn-sm" onclick="loadAdminNotices()">
+                <i class="bi bi-arrow-clockwise"></i>
+              </button>
+            </div>
+            <div id="adminNoticesContainer" class="d-flex flex-column gap-3">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="users-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">System Access & Role Control</h5>
+        <table class="table table-hover align-middle">
+          <thead class="table-light">
+            <tr><th>Username</th><th>Assigned Role</th><th>Last Login</th><th>Permission</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Aliza Khan</strong></td><td>Super Administrator / Owner</td><td>Just Now</td><td><span class="badge bg-success">Full Access</span></td></tr>
+            <tr><td><strong>Dr. Suresh Kulkarni</strong></td><td>Hostel Warden / Rector</td><td>Today 08:30 AM</td><td><span class="badge bg-primary">Operational</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="reports-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <h5 class="fw-bold mb-3">System Performance & Financial Reports</h5>
+        <div class="row g-3 text-center">
+          <div class="col-md-4"><div class="p-4 bg-light rounded-3 border"><small class="text-muted">Monthly Revenue</small><h4 class="fw-bold text-primary mb-0">₹ 8.45 Lakhs</h4></div></div>
+          <div class="col-md-4"><div class="p-4 bg-light rounded-3 border"><small class="text-muted">Average Occupancy</small><h4 class="fw-bold text-success mb-0">91.4%</h4></div></div>
+          <div class="col-md-4"><div class="p-4 bg-light rounded-3 border"><small class="text-muted">Ticket Resolution Time</small><h4 class="fw-bold text-warning mb-0">3.8 Hours</h4></div></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="settings-tab" class="tab-content-panel">
+      <div class="dashboard-card">
+        <div class="card-title-custom d-flex justify-content-between align-items-center">
+          <span><i class="bi bi-gear-wide-connected me-2"></i>Global System Configuration</span>
+          <span class="badge bg-primary">Admin Control Only</span>
+        </div>
+
+        <form onsubmit="event.preventDefault(); alert('System configuration updated successfully!');">
+
+          <h6 class="fw-bold text-primary mb-3">1. Institution & Academic Session</h6>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              <label class="form-label small fw-bold">Institution Name</label>
+              <input type="text" class="form-control" value="Smart Hostel Management System" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small fw-bold">Active Academic Year</label>
+              <input type="text" class="form-control" value="2026 - 2027" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label small fw-bold">Current Term</label>
+              <select class="form-select">
+                <option selected>Odd Semester (Term 1)</option>
+                <option>Even Semester (Term 2)</option>
+              </select>
+            </div>
+          </div>
+
+          <h6 class="fw-bold text-primary mb-3">2. Curfew & Gate Pass Rules</h6>
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Night Curfew Time</label>
+              <input type="time" class="form-control" value="21:30" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Mess Opt-Out Cutoff</label>
+              <input type="time" class="form-control" value="09:00" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label small fw-bold">Late Fee Per Day (₹)</label>
+              <input type="number" class="form-control" value="50" min="0" required>
+            </div>
+          </div>
+
+          <h6 class="fw-bold text-primary mb-3">3. Communication & Alerts</h6>
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="smsAlerts" checked>
+                <label class="form-check-label small fw-bold" for="smsAlerts">SMS Outpass Alerts to Parents</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="feeReminders" checked>
+                <label class="form-check-label small fw-bold" for="feeReminders">Auto Fee Due Reminders</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-check form-switch">
+                <input class="form-check-input" type="checkbox" id="autoAllocate">
+                <label class="form-check-label small fw-bold" for="autoAllocate">Auto Room Allocation Engine</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="text-end border-top pt-3">
+            <button type="submit" class="btn btn-primary px-4">
+              <i class="bi bi-check2-circle me-1"></i> Save Configuration
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+
+    <div id="backup-tab" class="tab-content-panel">
+      <div class="dashboard-card text-center py-5">
+        <div class="user-avatar mx-auto mb-3" style="width:60px; height:60px; background:#eff6ff; color:#2563eb; font-size:1.8rem; border-radius:50%; display:flex; align-items:center; justify-content:center;">
+          <i class="bi bi-cloud-arrow-down"></i>
+        </div>
+        <h5 class="fw-bold">Database Backup & Recovery</h5>
+        <p class="text-muted small mx-auto" style="max-width: 450px;">Generate and download automated SQL database backups for student rosters, dues registers, and leave pass logs.</p>
+
+        <a href="http://127.0.0.1:5000/api/admin/export-db" class="btn btn-primary px-4">
+          <i class="bi bi-download me-1"></i> Export SQL Backup
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="app.js"></script>
+
+  <script>
+    const API_ENDPOINT = (typeof API_BASE !== 'undefined') ? API_BASE : 'http://127.0.0.1:5000/api';
+
+    // 1. Fetch live metrics for dashboard cards
+    async function loadAdminStats() {
+      try {
+        const res = await fetch(`${API_ENDPOINT}/admin/stats`);
+        if (!res.ok) return;
+        const data = await res.json();
+
+        const collectedEl = document.getElementById('admin-total-collected');
+        const complaintsEl = document.getElementById('admin-active-complaints');
+
+        if (collectedEl) {
+          collectedEl.textContent = `₹${data.total_collected.toLocaleString()}`;
+        }
+        if (complaintsEl) {
+          complaintsEl.textContent = data.active_complaints;
+        }
+      } catch (err) {
+        console.error('Error loading admin stats:', err);
+      }
+    }
+
+    // 2. Fetch and render notices feed
+    async function loadAdminNotices() {
+      const container = document.getElementById('adminNoticesContainer');
+      if (!container) return;
+
+      try {
+        const res = await fetch(`${API_ENDPOINT}/notices`);
+        const notices = await res.json();
+
+        if (!notices || notices.length === 0) {
+          container.innerHTML = '<p class="text-muted text-center py-4">No active notices published yet.</p>';
+          return;
+        }
+
+        container.innerHTML = '';
+        notices.forEach(item => {
+          container.insertAdjacentHTML('beforeend', `
+            <div class="p-3 border rounded-3 bg-light shadow-sm">
+              <div class="d-flex justify-content-between align-items-center mb-1">
+                <h6 class="fw-bold text-dark mb-0">${item.title}</h6>
+                <span class="badge bg-primary-subtle text-primary border border-primary-subtle">${item.target}</span>
+              </div>
+              <p class="small text-muted mb-2">${item.message}</p>
+              <small class="text-secondary" style="font-size: 0.75rem;">
+                <i class="bi bi-clock me-1"></i>${item.date_posted || 'Recent'}
+              </small>
+            </div>
+          `);
+        });
+      } catch (err) {
+        console.error('Error loading notices in admin panel:', err);
+        container.innerHTML = '<p class="text-danger small text-center">Failed to load notices from server.</p>';
+      }
+    }
+
+    // 3. Handle Admin Notice Publishing
+    async function publishNotice(event) {
+      event.preventDefault();
+
+      const title = document.getElementById('noticeTitle').value.trim();
+      const target = document.getElementById('noticeTarget').value;
+      const message = document.getElementById('noticeMessage').value.trim();
+
+      try {
+        const res = await fetch(`${API_ENDPOINT}/notices`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ title, target, message })
+        });
+
+        if (res.ok) {
+          alert('Notice broadcasted successfully!');
+          document.getElementById('noticePublishForm').reset();
+          loadAdminNotices();
+        } else {
+          const errData = await res.json();
+          alert('Error: ' + (errData.error || 'Failed to post notice.'));
+        }
+      } catch (err) {
+        console.error('Error publishing notice:', err);
+        alert('Server connection error.');
+      }
+    }
+
+    // 4. Load complaints list
+    async function loadAdminComplaints() {
+      try {
+        const res = await fetch(`${API_ENDPOINT}/complaints`);
+        const complaints = await res.json();
+        const tbody = document.getElementById('adminComplaintsTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = '';
+        if (complaints.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No complaints logged yet.</td></tr>';
+          return;
+        }
+
+        complaints.forEach(item => {
+          const isResolved = item.status === 'RESOLVED';
+          const badgeClass = isResolved ? 'bg-success' : 'bg-warning text-dark';
+          const priorityClass = item.priority === 'HIGH' ? 'bg-danger' : (item.priority === 'LOW' ? 'bg-secondary' : 'bg-warning text-dark');
+
+          tbody.insertAdjacentHTML('beforeend', `
+            <tr>
+              <td>#TC-${item.id}</td>
+              <td><strong>${item.student_name || 'Resident Student'}</strong></td>
+              <td>${item.room_no || 'C-204'}</td>
+              <td>${item.description}</td>
+              <td><span class="badge ${priorityClass}">${item.priority}</span></td>
+              <td><span class="badge ${badgeClass}">${item.status}</span></td>
+            </tr>
+          `);
+        });
+      } catch (err) {
+        console.error('Error loading admin complaints:', err);
+      }
+    }
+
+    // Initialize all datasets on page load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadAdminComplaints();
+      loadAdminStats();
+      loadAdminNotices();
+    });
+  </script>
+</body>
+</html>
