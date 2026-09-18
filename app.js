@@ -3,7 +3,7 @@
    Full-Stack Edition: Connected to Python Flask API (http://127.0.0.1:5000)
    ========================================================================== */
 
-const API_BASE = 'http://127.0.0.1:5000/api';
+const API_BASE = 'https://hostelmate-api-87vb.onrender.com/api';
 
 // 1. Tab Navigation
 function switchTab(tabName, clickedBtn) {
